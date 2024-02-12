@@ -37,7 +37,7 @@ public class Bartender extends Bar {
     if (str.equals("다시")) { //다시 추천받기인 상태라면
       System.out.println("Alcohol Therapy를 다시 진행하겠습니다.✨");
     } else { //처음 추천받는 거라면
-      System.out.println("감사합니다 - 고객님✨ Alcohol Therapy를 진행하겠습니다.✨");
+      System.out.println("감사합니다 - 고객님✨\nAlcohol Therapy를 진행하겠습니다.✨");
     }
   }
 
@@ -100,31 +100,52 @@ public class Bartender extends Bar {
     }
     //고객의 답변을 토대로한 고객의 선택내용 정리
     System.out.println("기분이 " + strArr[0] + "컨디션이 " + strArr[1] + strArr[2] + "고객님께");
-    System.out.println("다음과 같은 음료를 추천드립니다 : " + selectDrinks());
-    System.out.println("메뉴가 맘에 드신다면 주문해주시고 아니면 재추천드리겠습니다.");
+    System.out.println("다음과 같은 음료를 추천드립니다 : " + selectDrinks(intArr));
+    System.out.println("메뉴가 맘에 드신다면 주문해주시고 아니면 다시 추천드리겠습니다.");
   }
 
 
   //고객에게 맞는 추천음료 제시하기
   @Override
-  public String selectDrinks() {
+  public String selectDrinks(int[] intArr) {
     //Bar 클래스에 구현된 Drinks 인터페이스의 selectDrinks 오버라이딩
 
-    //랜덤으로 생성되는 난수 범위 설정
-    int randomNum = (int) (Math.random() * drinkArr.length); // 1 ~ Drink 인터페이스의 drinkArr의 길이까지 출력되는 난수
-    String[] bartenderDrinksArr = new String[drinkArr.length]; // 바텐더가 제조할 수 있는 음료의 배열 할당;
+//    String[] bartenderDrinksArr = new String[drinkArr.length]; // 바텐더가 제조할 수 있는 모든 음료의 배열 할당;
+//    String[] sweetDrinksArr = new String[sweetArr.length]; // 바텐더가 제조할 수 있는 단맛 음료의 배열 할당;
+//    String[] dryDrinkArr = new String[dryArr.length]; // 바텐더가 제조할 수 있는 드라이한맛 음료의 배열 할당;
+//    String[] specialDrinkArr = new String[specialArr.length]; // 바텐더가 제조할 수 있는 스페셜한맛 음료의 배열 할당;
 
-    for (int i = 0; i < drinkArr.length; i++) { // 깊은 복사로 interface에 선언한 배열과 분리
-      bartenderDrinksArr[i] = drinkArr[i];
+//    String[] bartenderDrinksArr = new String[drinkArr.length]; // 바텐더가 제조할 수 있는 모든 음료의 배열 할당;
+//    //랜덤으로 생성되는 난수 범위 설정
+//    int randomNum = (int) (Math.random() * sweetArr.length); // 1 ~ Drink 인터페이스의 drinkArr의 길이까지 출력되는 난수
+//    for (int i = 0; i < sweetArr.length; i++) { // 깊은 복사로 interface에 선언한 배열과 분리
+//      sweetDrinksArr[i] = sweetArr[i];
+//    }
+//    return bartenderDrinksArr[randomNum];
+
+
+    //intArr 에서 3번째 질문에 대한 값(단맛, 드라이한맛, 특별한맛 인 경우 구분)
+    if (intArr[2] == 1) { //단맛을 선택한 경우
+      return makeArray(sweetArr);
+    } else if (intArr[2] == 2) { //드라이한맛을 선택한 경우
+      return makeArray(dryArr);
+    } else if (intArr[2] == 3) { //특별한 맛을 선택한 경우
+      return makeArray(specialArr);
+    } else { // 모르겠다는 선택한 경우
+      return makeArray(drinkArr);// 랜덤으로 생성되는 난수 인덱스에 해당하는 음료 제시
     }
-
-    return bartenderDrinksArr[randomNum]; // 랜덤으로 생성되는 난수 인덱스에 해당하는 음료 제시
   }
 
-  public void recommendDrinks() {
-    System.out.println();
+  @Override
+  public String makeArray(String[] strArr) {
+    String[] bartenderDrinksArr = new String[strArr.length]; // 바텐더가 제조할 수 있는 모든 음료의 배열 할당;
+    //랜덤으로 생성되는 난수 범위 설정
+    int randomNum = (int) (Math.random() * strArr.length); // 1 ~ Drink 인터페이스의 해당하는 맛 음료배열의 길이까지 출력되는 난수
+    for (int i = 0; i < strArr.length; i++) { // 깊은 복사로 interface에 선언한 배열과 분리
+      bartenderDrinksArr[i] = strArr[i];
+    }
+    return bartenderDrinksArr[randomNum];
   }
-
 
   //고객에게 주문받기
   public void takeOrder() {
