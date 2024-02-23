@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment></comment>
+    <entry key="selectLastCategoryCode">
+        SELECT
+              MAX(CATEGORY_CODE)
+         FROM TBL_CATEGORY
+    </entry>
+    <entry key="selectAllCategoryList">
+        SELECT
+               CATEGORY_CODE
+              ,CATEGORY_NAME
+          FROM TBL_CATEGORY
+    </entry>
+    <entry key="insertCategory">
+        INSERT
+        INTO TBL_CATEGORY
+        (
+           CATEGORY_CODE
+         , CATEGORY_NAME
+         , REF_CATEGORY_CODE
+        )
+        VALUES
+        (
+           ?
+         , ?
+         , ?
+        )
+    </entry>
+    <entry key="deleteCategory">
+        DELETE
+          FROM TBL_CATEGORY
+         WHERE CATEGORY_NAME = ?
+    </entry>
+</properties>
