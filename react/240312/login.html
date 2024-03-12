@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+  <title>Login</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
+    
+    const bodyStyle = {
+      padding: 0,
+      margin: 0,
+      boxSizing :'border-box',
+      display : 'flex',
+      justifyContent : 'center',
+      alignItems : 'center',    
+    }
+
+    const loginStyle = {
+      textColor : 'black',
+      width : 300,
+      height: 300,
+      border : '1px solid #000',
+      boxShadow : '0 1px 2px rgba( 0,0,0, 0.1)',
+      borderRadius : 10,
+      backgroundColor : '#ff5f5f'
+    }
+
+    class Login extends React.Component{
+      
+      state = {
+        enterId : '',
+        enterPw : '',
+        pressBtn : false
+      }
+
+      render() {
+        return(
+          <div style={{padding : bodyStyle.padding, margin : bodyStyle.margin, boxSizing : bodyStyle.boxSizing, display: bodyStyle.display, justifyContent : bodyStyle.justifyContent, alignItems : bodyStyle.alignItems}}>
+            <div style={{width: loginStyle.width, height : loginStyle.height, padding: 20, boxShadow : loginStyle.boxShadow, borderRadius:loginStyle.borderRadius, backgroundColor : loginStyle.backgroundColor, textAlign : 'center'}}>
+              <p style={{paddingBottom: 20, color : '#ffffff', fontSize: 24, fontWeight:600, }}>LOGIN</p>
+              
+              <div style={{display : 'flex'}}>
+                <p style={{paddingBottom: 10, marginRight: 10, color : '#ffffff', fontSize: 16, fontWeight:600}}>Id</p>
+                <input 
+                  type="text"
+                  placeholder="아이디를 입력해주세요"
+                  value = {this.state.enterId}
+                  style = {{ height: 50, }}
+                />
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<Login/>);
+  </script>
+</body>
+
+</html>
