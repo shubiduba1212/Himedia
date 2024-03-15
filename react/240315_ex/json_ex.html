@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <title>Imoji</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const {useState} = React;
+
+    const imgStyle = {
+      width: 300,
+      height : 'auto',
+      //objectFit : 'c'
+    };
+
+    function App(){
+
+      const [imojiName, setImojiName] = useState('텅');
+      const [imojiUrl, setImojiUrl] = useState('');
+
+      const onChangeHandler = (e) => {
+        console.log('current typed imoji name : '+e.target.value);
+        setImojiName(e.target.value);
+      }
+
+      const onClickHandler = () => {
+        console.log('imojiName : ' +imojiName);
+        //console.log('callAPI' + callAPIHandler(imojiName));
+        //setImojiUrl();
+        callAPIHandler(imojiName);
+      }
+
+      const callAPIHandler = (keyCode) => {
+        console.log('keyCode : ' + keyCode);
+        axios('https://collectionapi.metmuseum.org/public/collection/v1/objects/' + keyCode)
+        .then(response => {
+              console.log(response.data); 
+              console.log(response.data["primaryImage"]); 
+              setImojiUrl(response.data["primaryImage"]);
+            }
+          );
+        // axios('https://api.artic.edu/api/v1/products?limit=2')
+        // .then(response => {
+        //   console.log(response.data["data"]); 
+        //   console.log(response.data["data"][0]['image_url']); 
+        //   setImojiUrl(response.data["data"][0]['image_url']);}
+        //   );
+        //.then(response => {urlText = response.data; console.log('urlText : ' +urlText);})
+        
+        //.then(response => setImojiUrl(response.data["129884"]));
+        // fetch('https://api.pexels.com/v1/photos/')
+        // .then(response => console.log(response.json()));
+//        .then(response => console.log(response.data[`${keyCode}`]));
+        // const url = axios.get('https://api.github.com/emojis')
+        // .then(response => setImojiUrl(response.data[`${keyCode}`]));
+        //console.log('url : '+url.data);
+        //.then(response => console.log(response.data));
+        // .then(response => response.data[keyCode]);
+        
+        //return url;
+      }
+
+      return (
+        <>
+          <input type="text" onChange={onChangeHandler} />
+          <button onClick={onClickHandler}>검색</button>
+          <br/>
+          {imojiName == "텅" ? <div>{imojiName}</div> : <div><img style={imgStyle} src={imojiUrl}/></div>}
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+  </script>
+</body>
+</html>
