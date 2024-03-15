@@ -18,7 +18,7 @@
     // 입력한 문자열을 input에 입력하는 타자속도가 얼마나 걸리는지 alert로 표시
 
     // getTime
-    // enter키로 인식되도록    
+    // enter키로 인식되도록  
 
     function Timer(){
 
@@ -46,23 +46,35 @@
     
     function App(){
 
-      const [enterString, setEnterString] = useState('');
+      const [isEntered, setIsEntered] = useState(false);
+      const [promptText, setPromptText] = useState('');
       const [typeString, setTypeString] = useState('');
       const [pressEnter, setPressEnter] = useState(false);
-            
-      const answer = prompt('문자열을 입력해주세요.');
+      const [isTyped, setIsTyped] = useState(false);            
 
-
-      const enteredString = (enterAnswer) => {
-        enterAnswer = answer;
-        console.log('entered String : ' + enterAnswer);
-        setEnterString(enterAnswer);
-      }
-
-      console.log('answer : ' + answer);
+      useEffect(
+        () => {        
+          console.log('isEntered'+isEntered);
+          if (isEntered == false) {
+            const answer = prompt("문자열을 입력해주세요.");
+            console.log('Text entered in prompt :' + answer);
+            setPromptText(answer);
+            console.log('promptText :' + promptText);
+          }
+          // if (didPromptRef.current === false) {
+          //   didLogRef.current = true;
+          //   const pName = prompt("Insert name");
+          //   setPlayerName(pName);
+          // }
+        }, []
+      );
 
       const onChangeHander = (e) => {
-        
+          console.log('now typing in input'); 
+          console.log('isTyped : '+isTyped); 
+          setIsTyped(true); 
+          console.log('after isTyped : '+isTyped);
+          console.log()
       }
 
       
@@ -70,30 +82,47 @@
       
 
       useEffect(
-        () => { 
-          //console.log('타자 입력 중⌨');
-          console.log('typeString : ' + typeString);
-        },[typeString]
-      );
+        () => {
+          console.log('isTyped : '+isTyped);
+          if (isTyped == true) {
+            console.log('타이머가 시작합니다...');
 
-      //onChange={() => setPressEnter(true)}    
+            const timerStart = new Date().getTime();
+            console.log('timerStart : '+timerStart);  
+            
+            if(pressEnter == true){ //enter key 누른 상태              
+              const timerEnd = new Date().getTime();
+                console.log('timerEnd : '+timerEnd);
+
+                console.log('time took : '+((timerEnd - timerStart) / 1000))
+                
+                //alert(((timerEnd - timerStart) / 1000) + '초 걸렸습니다.');
+                //const takenTime = timerStart - timerEnd
+                //clearInterval(timer);
+              return () => {                                          
+                console.log('타이머가 종료됩니다...');
+              }
+            }
+          }
+        }
+      )
 
       // enter 키 누르기
       const handleKeyPress = (e) => {
         if(e.key === 'Enter') {
           console.log('enter키를 클릭했습니다.');
-          e.target.value == answer ? console.log('You typed right!') : console.log('You typed wrong!');
-          setPressEnter(true);
-          
-        }else{
-          console.log('enter키를 클릭하지 않았습니다.');
+          // e.target.value == answer ? console.log('You typed right!') : console.log('You typed wrong!');
+          setPressEnter(true);          
         }
       }
 
-      return (answer == undefined || answer == '' || answer == ' ') ? alert('문자열을 입력하지 않았습니다.') : (
-        <>          
-          <h2>{answer}</h2>
-          <input type="text" name="typeString" onKeyPress={handleKeyPress} />
+      //(answer == undefined || answer == '' || answer == ' ') ? alert('문자열을 입력하지 않았습니다.')
+
+      return (
+
+        <> 
+          <h2>{promptText}</h2>
+          <input type="text" name="typeString" onKeyPress={handleKeyPress} onChange={onChangeHander}/>
         </>
       );
     }
