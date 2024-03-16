@@ -6,52 +6,45 @@
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <title>Enter String</title>
+  <title>useEffect cleanup Ex</title>
 </head>
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    const { useState, useEffect } = React;
 
-    // 문자열을 입력해주세요.
+    const {useState, useEffect} = React;
 
-    // 입력한 문자열을 input에 입력하는 타자속도가 얼마나 걸리는지 alert로 표시
-
-    // getTime
-    // enter키로 인식되도록  
-
+    // 타자 속도 측정할 타이머
     function Timer(){
 
       useEffect(
-        () => {console.log('타이머가 시작합니다...');
-
-          const timerStart = new Date().getTime();
-          console.log('timerStart : '+timerStart);
+        () => {
+          console.log('타이머가 시작합니다...');
+          const timerStart = new Date().getTime(); // 타이머 시작시간 저장
+          console.log('timerStart : '+typeof timerStart);
 
           return () => {            
-            const timerEnd = new Date().getTime();
-            console.log('timerEnd : '+timerEnd);
-
-            console.log('time took : '+((timerEnd - timerStart) / 1000))
-
-            //const takenTime = timerStart - timerEnd
-            //clearInterval(timer);
+            const timerEnd = new Date().getTime(); // 타이머 종료시간 저장
+            console.log('timerEnd : '+typeof timerEnd);
+            console.log('time took : '+((timerEnd - timerStart) / 1000)) // getTime()메서드로 측정한 종료시간에서 시작시간을 뺄셈한 후, getTime()메서드는 ms로 표시되므로, 초 단위로 보여주기 위해 1000으로 나누어준다.
             console.log('타이머가 종료됩니다...');
+            alert('타자 속도 : ' + ((timerEnd - timerStart) / 1000) + '초 입니다.', () => {
+              <App/>
+            });
           }
         },
         []
       );
 
     }
-    
+
     function App(){
 
       const [isEntered, setIsEntered] = useState(false);
-      const [promptText, setPromptText] = useState('');
-      const [typeString, setTypeString] = useState('');
-      const [pressEnter, setPressEnter] = useState(false);
-      const [isTyped, setIsTyped] = useState(false);            
-
+      const [promptText, setPromptText] = useState(''); // prompt창 입력여부
+      const [isTrue, setIsTrue] = useState(false); // input에 입력시작여부
+      const [typeText, setTypeText] = useState(''); // input에 입력한 텍스트
+      
       useEffect(
         () => {        
           console.log('isEntered'+isEntered);
@@ -61,73 +54,44 @@
             setPromptText(answer);
             console.log('promptText :' + promptText);
           }
-          // if (didPromptRef.current === false) {
-          //   didLogRef.current = true;
-          //   const pName = prompt("Insert name");
-          //   setPlayerName(pName);
-          // }
         }, []
       );
 
-      const onChangeHander = (e) => {
-          console.log('now typing in input'); 
-          console.log('isTyped : '+isTyped); 
-          setIsTyped(true); 
-          console.log('after isTyped : '+isTyped);
-          console.log()
-      }
-
-      
-      // 타자 입력 시작 시 타이머 시작
-      
-
-      useEffect(
-        () => {
-          console.log('isTyped : '+isTyped);
-          if (isTyped == true) {
-            console.log('타이머가 시작합니다...');
-
-            const timerStart = new Date().getTime();
-            console.log('timerStart : '+timerStart);  
-            
-            if(pressEnter == true){ //enter key 누른 상태              
-              const timerEnd = new Date().getTime();
-                console.log('timerEnd : '+timerEnd);
-
-                console.log('time took : '+((timerEnd - timerStart) / 1000))
-                
-                //alert(((timerEnd - timerStart) / 1000) + '초 걸렸습니다.');
-                //const takenTime = timerStart - timerEnd
-                //clearInterval(timer);
-              return () => {                                          
-                console.log('타이머가 종료됩니다...');
-              }
-            }
-          }
-        }
-      )
-
-      // enter 키 누르기
       const handleKeyPress = (e) => {
-        if(e.key === 'Enter') {
+        console.log('current pressed key : ' + e.key);
+        //e.key === 'Enter' ?  setIsTrue(false) : setIsTrue(true);
+        if(e.key === 'Enter') { // Enter키를 눌렀다면
           console.log('enter키를 클릭했습니다.');
-          // e.target.value == answer ? console.log('You typed right!') : console.log('You typed wrong!');
-          setPressEnter(true);          
-        }
+          
+          // input에 입력한 텍스트와 prompt창에 입력한 텍스트 일치 여부 확인 후, 일치하면 Timer 종료 / 불일치하면 Timer 계속 동작
+          promptText == typeText ? setIsTrue(false) : setIsTrue(true);
+        } 
+
+        
       }
 
-      //(answer == undefined || answer == '' || answer == ' ') ? alert('문자열을 입력하지 않았습니다.')
+      // input에 텍스트 입력시작시, 입력시작여부 설정 및 Timer시작 동작
+      const onChangeHander = (e) => {
+          console.log('current typed text : ' + e.target.value);
+          setIsTrue(true); // 입력 시작 true - Timer 동작 시작
+          setTypeText(e.target.value); // 입력하는 텍스트로 TypeText의 state 변경 
+          console.log('typeText : '+typeText); // typeText의 state 변경되고 있는지 확인
+      }
 
-      return (
+      //
 
-        <> 
-          <h2>{promptText}</h2>
-          <input type="text" name="typeString" onKeyPress={handleKeyPress} onChange={onChangeHander}/>
+      return( 
+        (prompt != '' && prompt != undefined) ?
+        <>        
+          <h2>{promptText}</h2> 
+          <input onKeyPress={handleKeyPress} onChange={onChangeHander}/>
+          { isTrue && <Timer/>}
         </>
+        : <App/>
       );
     }
 
-    ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
   </script>
 </body>
 </html>
