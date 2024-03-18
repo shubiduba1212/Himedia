@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <title>fetch-api-key-ex</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function Weather(){
+      const [position, setPosition] = useState({});
+      const [cityName, setCityName] = useState('');
+      const [weather, setWeather] = useState([]);
+      const [wind, setWind] = useState({});
+      const [imoji, setImoji] = useState('');
+
+      //https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+
+      const ApiKey = 'efad8afe60e461868cc2f32160703ba5';
+
+      useEffect(
+        () => {
+          new Promise((resolve, reject) => {
+            console.log('promise executed');
+            const positionInfo = navigator.geolocation.getCurrentPosition(currentPosition => { 
+              setPosition({
+                latitude : currentPosition.coords.latitude,
+                longitude : currentPosition.coords.longitude
+              })
+
+              resolve(currentPosition.coords);            
+
+            });
+          }).then(coords => {
+            console.log('coords : '+coords);
+            axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&appid=${ApiKey}`)
+            .then(response => {
+              console.log(response.data);
+              setCityName(response.data.name);
+              setWeather({name : response.data.weather[0].main, description : response.data.weather[0].description});
+              setWind({dir : response.data.wind.deg, speed : response.data.wind.speed});
+              
+              //imoji 이름 설정
+              setImoji()
+
+            })
+
+            //imoji api
+            axios.get(``)
+          })
+          //promise
+        },
+        []
+      );
+
+      return (
+        <>
+          <h1>현재 위치</h1>
+          <h2>{cityName}</h2>
+          <h3>{`위도 : ${position.latitude}  경도 : ${position.longitude}`}</h3>
+          <h3>{`날씨 : ${weather.name}  날씨 설명 : ${weather.description}`}</h3>
+          <h3>{`풍향 : ${wind.dir}  풍속: ${wind.speed}m/s`}</h3>
+          <img src={}/>
+        </>
+      );
+    }
+
+    function App(){
+      return (
+        <>
+          <Weather/>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+  </script>
+</body>
+</html>
