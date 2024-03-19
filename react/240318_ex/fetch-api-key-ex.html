@@ -13,6 +13,9 @@
   <div id="root"></div>
   <script type="text/babel">
     const { useState, useEffect } = React;
+    const imgStyle = {
+      width: 200,      
+    }
 
     function Weather(){
       const [position, setPosition] = useState({});
@@ -24,6 +27,8 @@
       //https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
 
       const ApiKey = 'efad8afe60e461868cc2f32160703ba5';
+
+      
 
       useEffect(
         () => {
@@ -47,13 +52,78 @@
               setWeather({name : response.data.weather[0].main, description : response.data.weather[0].description});
               setWind({dir : response.data.wind.deg, speed : response.data.wind.speed});
               
-              //imoji 이름 설정
-              setImoji()
+              console.log('weather.name : ' + response.data.weather[0].main);
+              console.log('weather.name type : ' + typeof response.data.weather[0].main);
+
+              //imoji url 설정
+              switch(response.data.weather[0].main){
+                case 'Clouds' : 
+                console.log('current weather : clouds');
+                axios('https://api.github.com/emojis')
+                .then(response => {
+                      console.log(response.data);  
+                      console.log(response.data.cloud); 
+                      setImoji(response.data.cloud);
+                    })
+                // axios('https://collectionapi.metmuseum.org/public/collection/v1/objects/4832')
+                // .then(response => {
+                //       console.log(response.data); 
+                //       console.log(response.data["primaryImage"]); 
+                //       setImoji(response.data["primaryImage"]);
+                //     })
+                  break;
+                case 'Rain' : 
+                axios('https://api.github.com/emojis')
+                .then(response => {
+                      console.log(response.data);  
+                      console.log(response.data.cloud_with_rain); 
+                      setImoji(response.data.cloud_with_rain);
+                    })
+                // axios('https://collectionapi.metmuseum.org/public/collection/v1/objects/12577')
+                // .then(response => {
+                //       console.log(response.data); 
+                //       console.log(response.data["primaryImage"]); 
+                //       setImoji(response.data["primaryImage"]);
+                //     })
+                break;
+                case 'Snow' : 
+                axios('https://collectionapi.metmuseum.org/public/collection/v1/objects/25477')
+                .then(response => {
+                      console.log(response.data); 
+                      console.log(response.data["primaryImage"]); 
+                      setImoji(response.data["primaryImage"]);
+                    })
+                break;
+                case 'Sunny' : 
+                axios('https://collectionapi.metmuseum.org/public/collection/v1/objects/10298')
+                .then(response => {
+                      console.log(response.data); 
+                      console.log(response.data["primaryImage"]); 
+                      setImoji(response.data["primaryImage"]);
+                    })
+                break;
+                default : 
+                console.log('입력내용이 없습니다.');
+              }
+              // setImoji(
+              //   () => {
+                
+                  
+              //   }
+              // )
+              //axios('https://collectionapi.metmuseum.org/public/collection/v1/objects/' + keyCode)
+        // .then(response => {
+        //       console.log(response.data); 
+        //       console.log(response.data["primaryImage"]); 
+        //       setImojiUrl(response.data["primaryImage"]);
+        //     }
+        //   );
 
             })
 
             //imoji api
-            axios.get(``)
+            //https://api.github.com/emojis
+            //https://collectionapi.metmuseum.org/public/collection/v1/objects/
           })
           //promise
         },
@@ -67,7 +137,8 @@
           <h3>{`위도 : ${position.latitude}  경도 : ${position.longitude}`}</h3>
           <h3>{`날씨 : ${weather.name}  날씨 설명 : ${weather.description}`}</h3>
           <h3>{`풍향 : ${wind.dir}  풍속: ${wind.speed}m/s`}</h3>
-          <img src={}/>
+          <img style={imgStyle} src={imoji}/>
+
         </>
       );
     }
