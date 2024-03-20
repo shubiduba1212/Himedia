@@ -1,0 +1,91 @@
+[
+  {
+     "artCode":1,
+     "artTitle":"Splinter1",
+     "artPrice":6500000,
+     "artYear" : 2024,
+     "categoryName":"Painting",
+     "isOrderable":true,
+     "detail": {
+         "description": "centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+     }
+  },
+  {
+     "artCode":2,
+     "artTitle":"Splinter2",
+     "artPrice":65000,
+     "artYear" : 2023,
+     "categoryName":"Sculpture",
+     "isOrderable":true,
+     "detail": {
+         "description": "ng Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors "
+     }
+  },
+  {
+     "artCode":3,
+     "artTitle":"Splinter3",
+     "artPrice":10254485,
+     "artYear" : 1954,
+     "categoryName":"Craft",
+     "isOrderable":true,
+     "detail": {
+         "description": "industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+     }
+  },
+  {
+     "artCode":4,
+     "artTitle":"Splinter4",
+     "artPrice":6500000,
+     "artYear" : 2024,
+     "categoryName":"Painting",
+     "isOrderable":true,
+     "detail": {
+         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+     }
+  },
+  {
+     "artCode":5,
+     "artTitle":"Splinter5",
+     "artPrice":6500000,
+     "artYear" : 2024,
+     "categoryName":"Painting",
+     "isOrderable":true,
+     "detail": {
+         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+     }
+  },
+  {
+     "artCode":6,
+     "artTitle":"Splinter6",
+     "artPrice":6500000,
+     "artYear" : 2024,
+     "categoryName":"Painting",
+     "isOrderable":true,
+     "detail": {
+         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+     }
+  },
+  {
+     "artCode":7,
+     "artTitle":"Splinter7",
+     "artPrice":6500000,
+     "artYear" : 2024,
+     "categoryName":"Painting",
+     "isOrderable":true,
+     "detail": {
+         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+     }
+  },
+  {
+     "artCode":8,
+     "artTitle":"Splinter8",
+     "artPrice":6500000,
+     "artYear" : 2024,
+     "categoryName":"Painting",
+     "isOrderable":true,
+     "detail": {
+         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+     }
+  },
+  
+]
