@@ -1,0 +1,40 @@
+/* Search 검색페이지 */
+.search_cont {padding:60px 20px; background-color: #ffffff; margin: 0 auto;}
+
+/* searchBar */
+.searchBar{display: flex; justify-content: center; align-items: center;}
+/* IE의 경우 */
+/* input::-ms-clear,
+input::-ms-reveal{
+    display:none;
+} */
+/* 크롬의 경우 */
+/* input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration{
+    display:none;
+} */
+.searchBar > input {width: 68%; max-width:1088px; min-width:535.16px; height: 50px; padding: 0 10px; border-radius:5px; font-size: 16px; font-weight: 500; border: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
+.searchBar > input::placeholder {color: #878787;}
+.searchBar > input:focus {border: none;}
+.searchBar > button {width:9.166666666666667%; max-width:146.6666666666667px; min-width:72.14166666666667px; height: 50%; margin-left:20px; text-align: center; line-height: 50px; color: #ffffff; background-color: #28282a; font-size: 16px; font-weight: 500; border-radius: 10px; outline: none; border: none; cursor: pointer;} 
+
+/* searchResult */
+.searchResult {padding-top: 60px; margin: 0 auto;}
+.searchResult > p:first-child {padding-bottom: 40px; font-size: 24px; font-weight: 600; text-align: center;}
+.searchResult > p:last-of-type {padding-bottom: 20px; font-size: 14px; font-weight: 400; text-align: right;}
+
+/* searchResultList */
+.searchResultList {padding: 40px 0; border-top: 1px solid #28282a;}
+/* .searchResultList > ul {display: flex; justify-content: space-evenly; align-items: center; flex-wrap: wrap;} 
+.searchResultList > ul > li {width: calc(100% / 3 - 20px); margin-bottom: 40px; }*/
+.searchResultList > ul {display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;}
+.searchResultList > ul > li { margin-bottom: 40px; }
+.searchResultList > ul > li > a {display: block;}
+.searchResultList > ul > li > a > img {display: block;  width: 100%;}
+.searchResultList > ul > li > a > img {display: block;  width: 100%;}
+.searchResultList .descriptText {padding:10px 0;}
+.searchResultList .descriptText > p {font-size: 16px; font-weight: 500; color: #28282a;}
+.searchResultList .descriptText > p:nth-child(2) {padding:5px 0; font-size: 14px;font-style: italic; color: #878787;}
+.searchResultList .descriptText > p:last-child {font-weight: 600;}
