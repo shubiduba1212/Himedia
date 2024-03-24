@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/default.css">
+  <link rel="stylesheet" href="./assets/css/common.css">
+  <link rel="stylesheet" href="./assets/css/search.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  <title>HummingConnect</title>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header_cont">
+      <header class="header">
+        <div class="logo">
+          <a to='/main'>
+            <div class="logoImg">
+              <img src="./assets/img/logo.svg"alt="HummingConnect logo"/>
+            </div>
+            <div class="logoText">
+              <p>Humming</p>
+              <p>   Connect</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="headerRight">
+          <ul>
+            <li><a to='/search'><img src="./assets/img/searchIcon.svg"alt="search icon"/></a></li>
+            <li><a to='/mypage'><img src="./assets/img/mypageIcon.svg"  alt="mypage icon"/></a></li>
+            <li><a to='/order'><img src="./assets/img/orderIcon.svg" alt="order icon"/></a></li>
+            <li><a to='/sell'><img src="./assets/img/sellIcon.svg" alt="sell icon"/></a></li>
+            <li class="loginBtn"><a to='/login'>LOGIN</a></li>
+            <li><a to='/main'><img src="./assets/img/logoutIcon.svg" alt="logout icon"/></a></li>
+          </ul>
+        </div>
+      </header>
+    </div>  
+    <!-- //header -->
+
+    <div class="main_cont">
+      <div class="search_cont">
+        <div class="searchBar">
+          <input type="search" placeholder="검색할 작품 및 작가명을 입력해주세요.">
+          <button>검색</button>
+        </div>
+        <div class="searchResult">
+          <p>SEARCH RESULT</p>
+          <p class="d_none">😆😍개의 작품이 검색되었습니다.</p>
+          <div class="searchResultList">
+
+            <div class="nullResult">
+              <p>''검색 결과가 없습니다. </p>
+            </div>
+
+            <ul style="display: none;">
+              <li>
+                <a href="#">
+                  <img src="./assets/img/logo.png" alt="search result image">
+                  <div class="descriptText">
+                    <p>작가명 Artist</p>
+                    <p>작품명 Title, 연도 Year</p>          
+                    <p>작품가격 Price</p>          
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="./assets/img/logo.png" alt="search result image">
+                  <div class="descriptText">
+                    <p>작가명 Artist</p>
+                    <p>작품명 Title, 연도 Year</p>          
+                    <p>작품가격 Price</p>          
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="./assets/img/logo.png" alt="search result image">
+                  <div class="descriptText">
+                    <p>작가명 Artist</p>
+                    <p>작품명 Title, 연도 Year</p>          
+                    <p>작품가격 Price</p>          
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="./assets/img/logo.png" alt="search result image">
+                  <div class="descriptText">
+                    <p>작가명 Artist</p>
+                    <p>작품명 Title, 연도 Year</p>          
+                    <p>작품가격 Price</p>          
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="./assets/img/logo.png" alt="search result image">
+                  <div class="descriptText">
+                    <p>작가명 Artist</p>
+                    <p>작품명 Title, 연도 Year</p>          
+                    <p>작품가격 Price</p>          
+                  </div>
+                </a>
+              </li>
+            </ul>
+
+            <!-- pagination -->
+            <div class="pagination d_none">
+              <span class="prevBtn"></span>
+              <ul>
+                <li class="active"><a href="#">1</a></li>
+              </ul>
+              <span class="nextBtn"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- search_cont -->
+    </div>
+
+    <div class="footer_cont">
+      <footer class="footer">
+        <div class="logo">
+          <a href="#">
+            <div class="logoImg">
+              <img src="./assets/img/logo.svg" alt="HummingConnect logo"/>
+            </div>
+            <div class="logoText">
+              <p>Humming</p>
+              <p>   Connect</p>
+            </div>
+          </a>
+        </div>
+        <ul class="footer_menu">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+        <div class="footerRight">
+          <ul>
+            <li><a href="#"><img src="./assets/img/twitterIcon.svg" alt="twitter icon" /></a></li>
+            <li><a href="#"><img src="./assets/img/facebookIcon.svg" alt="facebook icon" /></a></li>
+            <li><a href="#"><img src="./assets/img/instagramIcon.svg" alt="instagram icon" /></a></li>
+          </ul>
+          <p>2024 Humming Connect . All Rights Reserved</p>
+        </div>
+      </footer>
+    </div>  
+  </div>
+</body>
+</html>
