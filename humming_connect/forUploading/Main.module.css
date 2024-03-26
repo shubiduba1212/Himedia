@@ -1,0 +1,11 @@
+/* 
+className : "sliderBox",
+    dotsClass : "dotStyle"
+*/
+
+.sliderBox {display: flex; justify-content: center; align-items: center; max-width:1600px; height: 400px; margin:0 auto;}
+.sliderBox > img {width: 100%; max-width: fit-content;}
+.sliderBox > .slick-next {right : 0;}
+.sliderBox > .slick-prev {left : 0;}
+
+.centerBox {height: 300px; text-align: center; background-color: #fe3;}
