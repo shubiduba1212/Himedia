@@ -1,7 +1,8 @@
 import * as request from 'superagent';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-export function ArtList() {
+export function ArtWorkList() {
 
   const [artList, setArtList] = useState([]);
 
@@ -20,54 +21,59 @@ export function ArtList() {
             .set('X-Xapp-Token', token)
             .set('Accept', 'application/vnd.artsy-v2+json')
             .then((res) => {     
-
+              //console.log(JSON.stringify(res.body._embedded.artists));
               // API response 데이터에서 필요한 데이터만 추출해 새로운 배열 생성
-              const newArtList = (res.body._embedded.artists).map((artist, index) => {              
-
+              const newArtList = (res.body._embedded.artists).map((artist, index) => {
                 // 가격 랜덤 생성
                 const getRandomIntInclusive = (Math.floor(Math.random() * 99) + 1) * (Math.floor(Math.random()) * 100 + 100000);
-                
+                  
                   return {
-                    artCode : index + 1, // artLIst내 객체 구분에 필요한 key
-                    artist : artist.name, // 작가명
-                    nationality : artist.nationality, // 국적
-                    price : getRandomIntInclusive, // 가격  
-                    birthday : artist.birthday, // 출생연도
-                    date : artist.birthday == '' ? "unknown ": (parseInt(artist.birthday) + (Math.floor(Math.random() * 50) + 20)) >= 2024 ? 2024 : (parseInt(artist.birthday) + (Math.floor(Math.random() * 10) + 20)), // 작품연도
-                    imgUrl : (artist._links.image.href).replace('{image_version}', 'square') // 이미지 url(이미지 사이즈 설정 가능)
-                  };
+                      artCode : index + 1, // artLIst내 객체 구분에 필요한 key
+                      artist : artist.name, // 작가명
+                      nationality : artist.nationality, // 국적
+                      price : getRandomIntInclusive, // 가격  
+                      birthday : artist.birthday, // 출생연도
+                      date : artist.birthday === '' ? "unknown ": (parseInt(artist.birthday) + (Math.floor(Math.random() * 50) + 20)) >= 2024 ? 2024 : (parseInt(artist.birthday) + (Math.floor(Math.random() * 10) + 20)), // 작품연도
+                      imgUrl : artist._links.image === undefined ? (res.body._embedded.artists[49]._links.image.href).replace('{image_version}', 'square') : (artist._links.image.href).replace('{image_version}', 'square') // 이미지 url(이미지 사이즈 설정 가능)                    
+                  } 
                 
                 }
               );
-              
-              // description 
               request
               .get('https://api.artsy.net/api/genes?size=50')
               .set('X-Xapp-Token', token)
               .set('Accept', 'application/vnd.artsy-v2+json')
               .then((res) => {
+                // (res.body._embedded.genes).map((genes, index) => 
+                //   console.log(JSON.stringify(genes))
+                // )                   
                 (res.body._embedded.genes).map((genes, index) => {                                    
                   return newArtList[index].description = genes.description; // description 작품설명
-                })                   
+                })
+                //console.log('list after description: ' + JSON.stringify(list));
+                //setArtList(newArtList);          
               })
-
-              // art detail info 
               request
-              .get('https://api.artsy.net/api/artworks?size=50&page=1&exact=true')
-              .set('X-Xapp-Token', token)
-              .set('Accept', 'application/vnd.artsy-v2+json')
-              .then((res) => {
-                (res.body._embedded.artworks).map((artwork, index) => {                                    
+                .get('https://api.artsy.net/api/artworks?size=50&page=1&exact=true')
+                .set('X-Xapp-Token', token)
+                .set('Accept', 'application/vnd.artsy-v2+json')
+                .then((res) => {
+                  (res.body._embedded.artworks).map((artwork, index) => {     
                     newArtList[index].title = artwork.title; // 작품명
                     newArtList[index].materials = artwork.medium; // 작품 소재
                     newArtList[index].dimensions_cm = artwork.dimensions.cm.text; // 작품사이즈 cm
-                    newArtList[index].dimensions_in = artwork.dimensions.in.text; // 작품사이즈 인치                    
-                })                   
-              })
-          resolve(newArtList);
-          
-          setArtList(newArtList);
-        })        
+                    newArtList[index].dimensions_in = artwork.dimensions.in.text; // 작품사이즈 인치  
+                      return newArtList;
+                  })
+                  // console.log('list after artwork: ' + JSON.stringify(list));
+                  setArtList(newArtList);
+                  // console.log('artlist afterall :' + JSON.stringify(artList));
+                })
+              
+          resolve(artList);
+          return artList;
+          //console.log('new Artist afterall : ' + newArtList);
+        })       
       })
     },[]
 
@@ -75,7 +81,30 @@ export function ArtList() {
   );
   //console.log("artList after call API : ");
   //console.table(artList);
-    const artsyArtList = JSON.stringify(artList);
+  //console.log(artList);
+  const artsyArtList = JSON.stringify(artList);
 
   return artsyArtList;
+  // const artListItem = artList.map(artItem => 
+  //   <li key={artItem.artCode} art={artItem}>
+  //     <Link>
+  //       <img src={artItem.imgUrl} alt="search result"/>
+  //       {/*src={`${process.env.PUBLIC_URL}/img/searchIcon.svg`}*/}
+  //       <div>
+  //         <p>{artItem.artist}</p>
+  //         <p>{artItem.description}</p>
+  //         <p>{artItem.title}, {artItem.date}</p>          
+  //         <p>￦{artItem.price}</p>          
+  //       </div>
+  //     </Link>
+  //   </li>
+  // );
+
+  // return (
+  //   <>
+  //     <ul style={{display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20}}>
+  //       {artListItem}
+  //     </ul>
+  //   </>
+  // );
 }
