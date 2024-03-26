@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import SearchStyle from '../styles/Search.module.css'
 import ArtItem from '../components/ArtItem';
 
-export default function SearchTest(artWorkList){
+export default function Search(artWorkList){
 
   const [artsList, setArtsList] = useState([]); // 작품리스트
   const [searchValue, setSearchValue] = useState(''); // 검색어
@@ -13,7 +13,7 @@ export default function SearchTest(artWorkList){
       <p>검색어를 입력해주세요. </p>
     </div>
   ) // 검색결과 없을 시 표시 영역
-
+  const [searchTitle, setSearchTitle] = useState('SEARCH RESULT'); // 검색 결과 title
 
   useEffect(
     () => {
@@ -41,6 +41,7 @@ export default function SearchTest(artWorkList){
       setSearchedItem(''); // 검색어 미입력시 결과 초기화
       setCount(`0개의 작품이 검색되었습니다.`); // 검색 작품 갯수 표시
     } else {
+      setSearchTitle(`'${searchValue}' 검색 결과`); // 검색 결과 타이틀 변경
       console.log('검색어 입력 완료');
       console.log(filteredList.length);
       if(filteredList.length === 0){ //검색어를 입력했으나 해당 검색 결과가 없는 경우
@@ -62,12 +63,12 @@ export default function SearchTest(artWorkList){
   }
 
   //<div className={`${SearchStyle.d_none}, ${SearchStyle.pagination}`}>
-//   <span className={SearchStyle.prevBtn}></span>
-//   <ul>
-//     <li className={SearchStyle.active}><Link>1</Link></li>
-//   </ul>
-//   <span className={SearchStyle.nextBtn}></span>
-// </div>
+  //   <span className={SearchStyle.prevBtn}></span>
+  //   <ul>
+  //     <li className={SearchStyle.active}><Link>1</Link></li>
+  //   </ul>
+  //   <span className={SearchStyle.nextBtn}></span>
+  // </div>
 
   return(    
     <>      
@@ -79,12 +80,13 @@ export default function SearchTest(artWorkList){
               name="artName"
               placeholder="검색할 작품 및 작가명을 입력해주세요."
               onChange={e => setSearchValue(e.target.value)}
+              onKeyDown={e => e.key == "Enter" ? onClickHandler() : null }
               value={searchValue || ''} 
             />
             <button onClick={onClickHandler}>검색</button>
           </div>
           <div className={SearchStyle.searchResult}>
-            <p>SEARCH RESULT</p>
+            <p>{searchTitle}</p>
             <p>{count}</p>            
             {/*<p>😆😍개의 작품이 검색되었습니다.</p>*/}
             <div className={SearchStyle.searchResultList}>
