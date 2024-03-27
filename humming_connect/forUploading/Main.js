@@ -1,125 +1,31 @@
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import '../styles/slick-theme.css';
+import '../styles/slick.css';
 import mainStyle from './Main.module.css';
 import Slider from "react-slick";
-//import { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
-import ArtItem from '../components/ArtItem';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import ArtItem from '../components/ArtItem'
 
-export default function Main(artWorkList){
-  //console.log(typeof ArtWorkList().length);
-  // console.log(JSON.parse(ArtWorkList()));
+export default function Main(artWorkList) {  
+    const [artsList, setArtsList] = useState([]);
+    const [bannerIndex, setBannerIndex] = useState([7,29,14]);
 
-  //const newArtList = JSON.parse(artList());
-  // console.log()
+    useEffect(
+      () => {
+        if(artWorkList.artList === undefined){
 
-  // const tagArt = newArtList.map(artItem => 
-  //       console.log(artItem.artist)
-  //   )
-  // const artListItem =  (JSON.parse(artWorkList.artList)).map(artItem => <ArtItem key={artItem.artCode} art={artItem}/>);
-
-  // const artListTitle = (JSON.parse(artWorkList.artList)).map(artItem => console.log(artItem));
+        } else {
+          setArtsList(JSON.parse(artWorkList.artList)); //작품리스트 데이터 저장
+        }        
+        setBannerIndex(bannerIndex.map(num => {num = Math.floor(Math.random() * 49)})) // 배너 이미지 랜덤 변경을 위한 index 숫자 랜덤 생성 및 state 설정
+      },
+      []
+    );
   
-  const artList = (JSON.parse(artWorkList.artWorkList));
-
-  const CenterMode = () => {
-    const settings = {
-      className: "center",
-      centerMode: true,
-      infinite: true,
-      centerPadding: "60px",
-      slidesToShow: 3,
-      speed: 500
-    };
-
-    return(
-      <div className="slider-container">
-      <Slider {...settings}>
-        <div className={mainStyle.slickCenter}>
-          <h3 className={mainStyle.h3}>1</h3>
-        </div>
-        <div className={mainStyle.slickCenter}>
-          <h3 className={mainStyle.h3}>2</h3>
-        </div>
-        <div className={mainStyle.slickCenter}>
-          <h3 className={mainStyle.h3}>3</h3>
-        </div>
-        <div className={mainStyle.slickCenter}>
-          <h3 className={mainStyle.h3}>4</h3>
-        </div>
-        <div className={mainStyle.slickCenter}>
-          <h3 className={mainStyle.h3}>5</h3>
-        </div>
-        <div className={mainStyle.slickCenter}>
-          <h3 className={mainStyle.h3}>6</h3>
-        </div>
-      </Slider>
-    </div>
-    )
-    // return (
-    //   <div className="slider-container">
-    //     <Slider {...settings}>
-    //       <div className={mainStyle.centerBox}>
-    //         <Link>
-    //           <img src={artList[32].imgUrl} alt="new art Item img" />
-    //           <div className={mainStyle.newText}>
-    //             <p>{artList[32].title}</p>
-    //             <p>{artList[32].artist}</p>
-    //           </div>
-    //         </Link>
-    //       </div>
-    //       <div className={mainStyle.centerBox}>
-    //         <Link>
-    //             <img src={artList[6].imgUrl} alt="new art Item img" />
-    //             <div className={mainStyle.newText}>
-    //               <p>{artList[6].title}</p>
-    //               <p>{artList[6].artist}</p>
-    //             </div>
-    //           </Link>
-    //       </div>
-    //       <div className={mainStyle.centerBox} style={{marginRight: 10}}>
-    //         <Link>
-    //             <img src={artList[19].imgUrl} alt="new art Item img" />
-    //             <div className={mainStyle.newText}>
-    //               <p>{artList[19].title}</p>
-    //               <p>{artList[19].artist}</p>
-    //             </div>
-    //         </Link>
-    //       </div>
-    //       <div className={mainStyle.centerBox}>
-    //         <Link>
-    //           <img src={artList[23].imgUrl} alt="new art Item img" />
-    //           <div className={mainStyle.newText}>
-    //             <p>{artList[23].title}</p>
-    //             <p>{artList[23].artist}</p>
-    //           </div>
-    //         </Link>
-    //       </div>
-    //       <div className={mainStyle.centerBox} style={{marginRight: 10}}>
-    //         <Link>
-    //           <img src={artList[13].imgUrl} alt="new art Item img" />
-    //           <div className={mainStyle.newText}>
-    //             <p>{artList[13].title}</p>
-    //             <p>{artList[13].artist}</p>
-    //           </div>
-    //         </Link>
-    //       </div>
-    //       <div className={mainStyle.centerBox} style={{marginRight: 10}}>
-    //         <Link>
-    //           <img src={artList[9].imgUrl} alt="new art Item img" />
-    //           <div className={mainStyle.newText}>
-    //             <p>{artList[9].title}</p>
-    //             <p>{artList[9].artist}</p>
-    //           </div>
-    //         </Link>
-    //       </div>
-    //     </Slider>
-    //   </div>
-    // );
-  }
-
-  //console.log('artList json : ' + JSON.stringify(JSON.parse(artWorkList.artWorkList)));
-
+  // Artsy JSON데이터
+  const artList = (JSON.parse(artWorkList.artList)); 
+  
+  //상단 배너
   const banner = () => {
     const settings = {
       dots : true,
@@ -149,36 +55,90 @@ export default function Main(artWorkList){
       </Slider>
     );
   }
-  //{banner()}
 
-  const artListItem = (JSON.parse(artWorkList.artWorkList)).map(artItem => 
-    <ArtItem key={artItem.artCode} art={artItem}/>
-    // <li key={artItem.artCode} art={artItem}>
-    //   <Link>
-    //     <img src={artItem.imgUrl} alt="search result"/>
-    //     {/*src={`${process.env.PUBLIC_URL}/img/searchIcon.svg`}*/}
-    //     <div>
-    //       <p>{artItem.artist}</p>
-    //       <p>{artItem.description}</p>
-    //       <p>{artItem.title}, {artItem.date}</p>          
-    //       <p>￦{artItem.price}</p>          
-    //     </div>
-    //   </Link>
-    // </li>
-  );
+  //Our Picks
+  const CenterMode = () => {
+    const settings = {
+      className: "center",
+      centerMode: true,
+      infinite: true,
+      centerPadding: "60px",
+      slidesToShow: 3,
+      speed: 500
+    };
 
+    return(
+      <div className="slider-container">
+      <Slider {...settings}>
+        
+        <div className={mainStyle.centerList}>
+          <Link>
+            <img src={artList[0]?.imgUrl} alt="Our Picks art image"/>
+            <div className={mainStyle.descriptText}>
+              <p>{artList[0]?.artist}</p>
+              <p>{artList[0]?.title}, {artList[0]?.year}</p>          
+              <p>￦{artList[0]?.price}</p>          
+            </div>
+          </Link>
+        </div>
+        <div className={mainStyle.centerList}>
+          <Link>
+            <img src={artList[0]?.imgUrl} alt="Our Picks art image"/>
+            <div className={mainStyle.descriptText}>
+              <p>{artList[0]?.artist}</p>
+              <p>{artList[0]?.title}, {artList[0]?.year}</p>          
+              <p>￦{artList[0]?.price}</p>          
+            </div>
+          </Link>
+        </div>
+        <div className={mainStyle.centerList}>
+          <Link>
+            <img src={artList[0]?.imgUrl} alt="Our Picks art image"/>
+            <div className={mainStyle.descriptText}>
+              <p>{artList[0]?.artist}</p>
+              <p>{artList[0]?.title}, {artList[0]?.year}</p>          
+              <p>￦{artList[0]?.price}</p>          
+            </div>
+          </Link>
+        </div>
+        <div className={mainStyle.centerList}>
+          <Link>
+            <img src={artList[0]?.imgUrl} alt="Our Picks art image"/>
+            <div className={mainStyle.descriptText}>
+              <p>{artList[0]?.artist}</p>
+              <p>{artList[0]?.title}, {artList[0]?.year}</p>          
+              <p>￦{artList[0]?.price}</p>          
+            </div>
+          </Link>
+        </div>
+        <div className={mainStyle.centerList}>
+          <Link>
+            <img src={artList[0]?.imgUrl} alt="Our Picks art image"/>
+            <div className={mainStyle.descriptText}>
+              <p>{artList[0]?.artist}</p>
+              <p>{artList[0]?.title}, {artList[0]?.year}</p>          
+              <p>￦{artList[0]?.price}</p>          
+            </div>
+          </Link>
+        </div>
+      </Slider>
+    </div>
+    )
+  } // our picks slide
+
+  // 이미지/작가/타이틀,연도/가격 정보 표시하는 <li></li> 태그 
+  const artListItem = (JSON.parse(artWorkList.artList))?.map(artItem => <ArtItem key={artItem.artCode} art={artItem}/>);
 
   //NEW 리스트
   const newListItem = () => {
     const index = Math.floor(Math.random() * 49);
-      console.log('new list index : ' + index);
       const newItem = (
         <li>
           <Link>
-            <img src={artList[index].imgUrl} alt="new art Item img" />
+            <div><img src={artList[index]?.imgUrl} alt="new art Item img" /></div>
             <div className={mainStyle.newText}>
-              <p>{artList[index].title}</p>
-              <p>{artList[index].artist}</p>
+              <p>{artList[index]?.title}</p>
+              <p>{artList[index]?.artist}</p>
             </div>
           </Link>
         </li>
@@ -186,13 +146,12 @@ export default function Main(artWorkList){
       return newItem;
   }
 
-
-
   return(    
     <>
       <div className={mainStyle.mainCont}>      
         {banner()}{/* banner */}
-
+        
+        {/* NEW */} 
         <div className={mainStyle.mainListBox}>
           <p className={mainStyle.mainListTitle}>NEW</p>
           <ul>
@@ -200,16 +159,47 @@ export default function Main(artWorkList){
             {newListItem()}
             {newListItem()}
             {newListItem()}
-          </ul> {/* NEW */}
-
-          <p className={mainStyle.mainListTitle}>Our Picks</p>
-          {CenterMode()}{/* OurPicks */}
-
-
+          </ul>                  
         </div>
-        <ul style={{display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20}}>
-          {artListItem}
-        </ul>
+        
+        {/* OurPicks */}
+        <p className={mainStyle.mainListTitle} style={{paddingInline:20}}>Our Picks</p>
+        <div className={mainStyle.pickBox}>          
+          {CenterMode()} 
+        </div>
+
+        {/* 등록된 전체 상품 리스트 */}
+        <div className={mainStyle.saleBox}>
+          <p className={mainStyle.mainListTitle}>On Sale</p>
+          <ul>
+            {artListItem}
+          </ul>
+        </div>
+
+        {/* Promotion */}
+        <div className={mainStyle.promoBox}>
+          <p className={mainStyle.mainListTitle}>Promotion</p>
+          <ul>
+            <li>
+              <Link to='https://tbilisiartfair.art/en' target='_blank'>
+              <img src="https://tbilisiartfair.art/uploads/programme/1711377193.webp" alt="TBILISI ART FAIR img" />
+              <div className={mainStyle.promoText}>
+                <p>TBILISI ART FAIR(TAF)</p>
+                <p>11 - 14 APRIL</p>
+              </div>
+              </Link>
+            </li>
+            <li>
+              <Link to='https://www.artvancouver.net/' target='_blank'>
+                <video controls="" autoPlay={true} name="media" loop={true} draggable={true}><source src="https://video.wixstatic.com/video/80b7c2_c17d6630062b4563869aa3ee01e55726/480p/mp4/file.mp4" type="video/mp4"/></video>
+                <div className={mainStyle.promoText}>
+                  <p>ART VANCOUVER</p>
+                  <p>11 - 14 APRIL</p>
+                </div>
+              </Link>
+            </li>
+          </ul>
+        </div>        
       </div>
     </>
   );
