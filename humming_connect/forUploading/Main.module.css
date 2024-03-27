@@ -1,5 +1,5 @@
 /* Main 페이지 */
-.mainCont {max-width: 1600px; min-height: calc(100vh - 160px); margin: 0 auto; }
+.mainCont {max-width: 1600px; min-height: calc(100vh - 160px); margin: 0 auto;}
 
 /* Banner */
 .sliderBox {display: flex; justify-content: center; align-items: center; max-width:1600px; height: 400px; margin:0 auto; }
@@ -7,53 +7,53 @@
 .sliderBox > .slick-next {right : 0;}
 .sliderBox > .slick-prev {left : 0;}
 
+/* main contents */
 .mainListBox {padding: 40px 20px; margin-top: 20px;}
 .mainListTitle {padding-bottom: 20px; font-size: 24px; font-weight: 600;}
+
+/* NEW section */
 .mainListBox > ul { display: flex; justify-content: space-between; align-items: flex-start;}
-.mainListBox > ul > li {width: calc(20% - 10px); margin-right: 10px;}
+.mainListBox > ul > li {width: calc(20% - 10px);}
 .mainListBox > ul > li > a {display: flex; flex-direction: column; align-items: center; }
 .mainListBox > ul > li:last-child {margin-right:0;}
-.mainListBox > ul > li > a > img {width: 100%;}
+.mainListBox > ul > li > a > div {width: 100%; overflow: hidden;}
+.mainListBox > ul > li > a > div > img {width: 100%; transform: scale(1.0); transition: all .3s ease;}
+.mainListBox > ul > li > a > div > img:hover {width: 100%; 
+  transform: scale(1.75);}
 .newText {width: 100%; text-align: left;}
-.newText > p {font-size: 16px; font-weight: 500;}
-.newText > p:first-child {padding-top: 10px; font-style: italic;}
-.newText > p:last-child {padding-top: 10px; }
+.newText > p {padding-top: 10px; font-size: 16px; font-weight: 500;}
+.newText > p:first-child {font-style: italic;}
 
+/* Our Picks section */
+.pickBox {padding: 0 50px;}
 /* Center slick slide */
-.centerBox { padding: 20px; text-align: center; background-color: #fe3; opacity: 1;
-  transform: scale(1.08);}
-.centerBox > a {display: flex; flex-direction: column;}  
-.centerBox > a > img{width: 100%;}  
-.center .slick-center h3 {
-  color: #e67e22 !important;
-  opacity: 1 !important;
-  transform: scale(1.08) !important;
-}
-.center h3 {
-  opacity: .8 !important;
-  transition: .3s !important;
-}
+.centerList {padding: 10px;}
+.centerList > a {display: block; margin: 10px; padding: 2%; position: relative; transition: all .3s ease;}
+.centerList > a > img, .saleBox > ul > li > a > img {display: block;  width: 100%;}
+.centerList .descriptText, .saleBox .descriptText {padding:10px 0;}
+.centerList .descriptText > p, .saleBox .descriptText > p {font-size: 16px; font-weight: 500; color: #28282a;}
+.centerList .descriptText > p:nth-child(2), .saleBox .descriptText > p:nth-child(2) {padding:5px 0; font-size: 14px; font-style: italic; color: #878787;}
+.centerList .descriptText > p:last-child, .saleBox .descriptText > p:last-child {font-weight: 600;}
 
-.h3 {
-  background: #5f9ea0;
-  color: #fff;
-  font-size: 36px;
-  line-height: 100px;
-  margin: 10px;
-  padding: 2%;
-  position: relative;
-  text-align: center;
-}
-.slick-next:before, .slick-prev:before {
-  color: #000;
-}
-.slickCenter {padding: 20px;}
-.slickCenter h3 {
-  color: #e67e22;
-  opacity: 1;
-  -ms-transform: scale(1.08);
-  transform: scale(1.08);
-}
-h3 {
-  transition: all .3s ease;
-}
+/* Sale List */
+.saleBox { padding: 40px 20px;}
+.saleBox > ul {display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;}
+.saleBox > ul > li { margin-bottom: 40px; }
+.saleBox > ul > li > a {display: block;}
+
+
+/* Promotion section */
+.promoBox {padding: 40px 20px 100px; margin-top: 20px;}
+.promoBox > ul {display: flex; justify-content: space-between; align-items: flex-start;}
+/* flex: flex-grow | flex-shrink | flex-basis; */
+.promoBox > ul > li:first-child {flex: 1 0 24.4%; align-self: stretch;}
+.promoBox > ul > li:last-child {flex: 2 0 calc(62% - 10px); margin-left: 20px;}
+.promoBox > ul > li > a {display: flex; flex-direction: column; align-items: center; height: 100%;}
+.promoBox > ul > li > a > img {width: 100%; height: 100%;}
+.promoBox > ul > li > a > video {height: 100%; width: 100%; object-fit: cover; object-position: center center; opacity: 1;}
+.promoText {width: 100%; padding-top: 10px;}
+.promoText > p {padding-top: 10px; font-weight: 500; color: #28282a;}
+.promoText > p:first-child {font-size: 20px; }
+.promoText > p:last-child {font-size: 16px; color: #878787;}
+
+.artBox {max-width: 1600px;}
