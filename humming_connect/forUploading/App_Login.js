@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import LayoutLogin from './layouts/LayoutLogin';
 import { useState } from 'react';
 import { ArtWorkList } from './data/ArtWorkList';
-import MainLogin from './pages/Main_login';
+import MainLogin from './pages/MainLogin';
 
 export default function App() {  
   const [isLogin, setIsLogin] = useState(false);
