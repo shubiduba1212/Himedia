@@ -43,14 +43,44 @@ export default function Main(artWorkList) {
     //<img src={artsList[bannerIndex[0]].imgUrl} /> 
     return (
       <Slider {...settings}>
-        <div className={mainStyle.sliderBox}>
-          <img src={`${process.env.PUBLIC_URL}/img/banner01.jpg`} alt='banner image'/> 
+        <div class={mainStyle.sliderBox}>
+          <a>
+            <div class={mainStyle.imgBox}>
+              <img src={`${process.env.PUBLIC_URL}/img/banner01.svg`} alt="banner image"/>
+            </div>
+            <div class={mainStyle.bannerText}>
+              <p>Humming</p>
+              <p>Connect</p>
+              <p>새로운 문화예술 공간으로<br/>여러분을 초대합니다</p>
+              <span class={mainStyle.bannerInnerBtn}>About Us</span>
+            </div>
+          </a>          
         </div>
-        <div className={mainStyle.sliderBox}>
-          <img src={`${process.env.PUBLIC_URL}/img/banner02.jpg`} alt='banner image'/> 
-        </div> 
-        <div className={mainStyle.sliderBox}>
-          <img src={`${process.env.PUBLIC_URL}/img/banner03.jpg`}  alt='banner image'/> 
+        <div class={mainStyle.sliderBox}>
+          <a>
+            <div class={mainStyle.imgBox}>
+              <img src={`${process.env.PUBLIC_URL}/img/banner02.jpg`} alt="banner image"/>
+            </div>
+            <div class={mainStyle.bannerText}>              
+              <p>Humming</p>
+              <p>Connect</p>
+              <p>색다른 작품을 찾으세요?<br/>바로 검색하세요</p>
+              <span class={mainStyle.bannerInnerBtn_search}>Search</span>
+            </div>
+          </a>
+        </div>
+        <div class={mainStyle.sliderBox}>
+          <a>
+            <div class={mainStyle.imgBox}>
+              <img src={`${process.env.PUBLIC_URL}/img/banner03.jpg`} alt="banner image"/>
+            </div>
+            <div class={mainStyle.bannerText}>
+              <p>Humming</p>
+              <p>Connect</p>
+              <p>UNIQUE 작품의 주인을<br/>찾아드립니다</p>
+              <span class={mainStyle.bannerInnerBtn_sell}>Sell</span>
+            </div>
+          </a>
         </div>                
       </Slider>
     );
