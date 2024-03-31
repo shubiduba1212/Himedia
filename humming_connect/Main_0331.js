@@ -6,28 +6,29 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ArtItem from '../components/ArtItem'
 
-export default function Main(artWorkList) {  
+export default function Main(artWorkList) { 
     // const [artList, setartList] = useState([]);
     //const [newIndex, setNewIndex] = useState([7,29,14,8]);
 
     const {id} = useParams({});
     console.log('param : ' + id);
-    if(artWorkList.login === undefined){
-      console.log('props' + JSON.stringify(artWorkList.login));
-    }else{
-      console.log('props' + JSON.stringify(artWorkList.login));
-      artWorkList.login(id);
-    }
     
-
     useEffect(
       () => {
         //console.log('new Index '+newIndex);
+        window.scrollTo(0, 0);
+        
+        if(artWorkList.login === undefined){
+          console.log('props' + JSON.stringify(artWorkList.login));
+        }else{
+          console.log('props' + JSON.stringify(artWorkList.login));
+          artWorkList.login(id);
+        }
         if(artWorkList.artList === undefined){
 
         } else {
           // setartList(JSON.parse(artWorkList.artList)); //작품리스트 데이터 저장
-          console.log('artWorkList :' + JSON.parse(artWorkList.artList));
+          //console.log('artWorkList :' + JSON.parse(artWorkList.artList));
           //setNewIndex(newIndex.map((num, index ) =>  num = Math.floor(Math.random() * 49))) // New 이미지 랜덤 변경을 위한 index 숫자 랜덤 생성 및 state 설정
 
         }        
@@ -37,7 +38,7 @@ export default function Main(artWorkList) {
           // setartList();
         }
       },
-      []
+      [artWorkList]
     );
   
   // Artsy JSON데이터
@@ -64,7 +65,7 @@ export default function Main(artWorkList) {
         <div className={mainStyle.sliderBox}>
           <Link to={`/about/${id}`}>
             <div className={mainStyle.imgBox}>
-              <img src={`${process.env.PUBLIC_URL}/img/banner01.svg`} alt="banner image"/>
+              <img src={`${process.env.PUBLIC_URL}/img/banner01.svg`} alt="banner"/>
             </div>
             <div className={mainStyle.bannerText}>
               <p>Humming</p>
@@ -77,7 +78,7 @@ export default function Main(artWorkList) {
         <div className={mainStyle.sliderBox}>
           <Link to={`/search/${id}`}>
             <div className={mainStyle.imgBox}>
-              <img src={`${process.env.PUBLIC_URL}/img/banner02.jpg`} alt="banner image"/>
+              <img src={`${process.env.PUBLIC_URL}/img/banner02.jpg`} alt="banner"/>
             </div>
             <div className={mainStyle.bannerText}>              
               <p>Humming</p>
@@ -90,7 +91,7 @@ export default function Main(artWorkList) {
         <div className={mainStyle.sliderBox}>
           <Link to={(id === 'undefined' || id === undefined) ? '/login' : `/sell/${id}`}>
             <div className={mainStyle.imgBox}>
-              <img src={`${process.env.PUBLIC_URL}/img/banner03.jpg`} alt="banner image"/>
+              <img src={`${process.env.PUBLIC_URL}/img/banner03.jpg`} alt="banner"/>
             </div>
             <div className={mainStyle.bannerText}>
               <p>Humming</p>
@@ -123,7 +124,7 @@ export default function Main(artWorkList) {
             //key={artList[index + 3]?.artCode}
             <div className={mainStyle.centerList} key={index}>
               <Link to={`/detail/${artList[index + 3]?.artCode}/${artList[index + 3]?.price}/${id}`} key={artList[index + 3]?.artCode}>
-                <img src={artList[index + 3]?.imgUrl} alt="Our Picks art image"/>
+                <img src={artList[index + 3]?.imgUrl} alt="Our Picks art"/>
                 <div className={mainStyle.descriptText}>
                   <p>{artList[index + 3]?.artist}</p>
                   <p>{artList[index + 3]?.title}, {artList[index]?.year}</p>          
@@ -149,7 +150,7 @@ export default function Main(artWorkList) {
       return (
         <li key={index}>
           <Link to={`/detail/${artList[idx]?.artCode}/${artList[idx]?.price}/${id}`}>
-            <div><img src={artList[idx]?.imgUrl} alt="new art Item img" /></div>
+            <div><img src={artList[idx]?.imgUrl} alt="new art Item" /></div>
             <div className={mainStyle.newText}>
               <p>{artList[idx]?.title}</p>
               <p>{artList[idx]?.artist}</p>
@@ -193,7 +194,7 @@ export default function Main(artWorkList) {
           <ul>
             <li>
               <Link to='https://tbilisiartfair.art/en' target='_blank'>
-              <img src="https://tbilisiartfair.art/uploads/programme/1711377193.webp" alt="TBILISI ART FAIR img" />
+              <img src="https://tbilisiartfair.art/uploads/programme/1711377193.webp" alt="TBILISI ART FAIR" />
               <div className={mainStyle.promoText}>
                 <p>TBILISI ART FAIR(TAF)</p>
                 <p>11 - 14 APRIL</p>
