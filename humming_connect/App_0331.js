@@ -38,20 +38,20 @@ export default function App() {
 
   // login 상태 변경하는 함수
   const setLoginStatus = (status) => {
-    console.log('current Login Status from Login : ' + status);
+    //console.log('current Login Status from Login : ' + status);
     setIsLogin(status);
   }
 
   // loginId 상태 변경하는 함수
   const setLoginId = (logId) => {
-    console.log('current Login id from Login : ' + id);
+    //console.log('current Login id from Login : ' + id);
     setId(logId);
   }
   
   //Api호출 후 JSON데이터에 접근해 필요한 데이터만 추출
   useEffect(    
     () => {
-      console.log('useEffect isLogin from App.js : ' + isLogin );
+      //console.log('useEffect isLogin from App.js : ' + isLogin );
 
       const fetchDetails = async () => {
         try {
@@ -60,7 +60,7 @@ export default function App() {
           .set('X-Xapp-Token', token)
           .set('Accept', 'application/vnd.artsy-v2+json')
           .then((res) => {
-            console.log('first api called');
+            //console.log('first api called');
             // API response 데이터에서 필요한 데이터만 추출해 새로운 배열 생성
             const newArtList = (res.body._embedded.artists).map((artist, index) => {
               // 가격 랜덤 생성
@@ -72,7 +72,7 @@ export default function App() {
                 nationality: artist.nationality, // 국적
                 price: getRandomIntInclusive, // 가격  
                 birthday: (artist.birthday === '' || artist.birthday === null) ? "unknown" : artist.birthday, // 출생연도
-                date: (artist.birthday === '' || artist.birthday === null) ? "unknown " : (parseInt(artist.birthday) + (Math.floor(Math.random() * 50) + 20)) >= 2024 ? 2024 : (parseInt(artist.birthday) + (Math.floor(Math.random() * 10) + 20)), // 작품연도
+                date: (artist.date === '' || artist.date === null || (typeof artist.birthday) === "string") ? "unknown " : (parseInt(artist.birthday) + (Math.floor(Math.random() * 50) + 20)) >= 2024 ? 2024 : (parseInt(artist.birthday) + (Math.floor(Math.random() * 10) + 20)), // 작품연도
                 imgUrl: artist._links.image === undefined ? (res.body._embedded.artists[49]._links.image.href).replace('{image_version}', 'square') : (artist._links.image.href).replace('{image_version}', 'square') // 이미지 url(이미지 사이즈 설정 가능)                    
                 }
               }
@@ -85,7 +85,7 @@ export default function App() {
           .set('X-Xapp-Token', token)
           .set('Accept', 'application/vnd.artsy-v2+json')
           .then((res) => {
-            console.log('second api called');                 
+            //console.log('second api called');                 
             const secondArr = (res.body._embedded.genes).map((genes, index) => {
               return firstApi[index].description = genes.description; // description 작품설명
             })
@@ -98,7 +98,7 @@ export default function App() {
           .set('X-Xapp-Token', token)
           .set('Accept', 'application/vnd.artsy-v2+json')
           .then((res) => {
-            console.log('third api called');
+            //console.log('third api called');
             const thirdArr = (res.body._embedded.artworks).map((artwork, index) => {
               firstApi[index].title = artwork.title; // 작품명
               firstApi[index].materials = artwork.medium; // 작품 소재
@@ -106,7 +106,7 @@ export default function App() {
               firstApi[index].dimensions_in = artwork.dimensions.in.text; // 작품사이즈 인치  
               return artwork;
             })
-            console.log(firstApi);
+            //console.log(firstApi);
             return thirdArr;
           })
 
